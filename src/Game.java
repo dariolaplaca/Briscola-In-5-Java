@@ -58,7 +58,8 @@ public class Game {
             setTurnOrder();
             nextTurn();
         }
-
+        getMonteCards();
+        endGame(countPoints());
     }
 
     public void setupPlayers() {
@@ -85,6 +86,8 @@ public class Game {
         deck.shuffle();
     }
 
+
+    //TODO Fix Auction bug where it asks for one more input after all the players passes except one
     private int auction() {
         HashMap<Player, Integer> playersAuction = new HashMap<>();
         int playersOut = 0;
@@ -124,9 +127,6 @@ public class Game {
         chosenPlayer.setMate(true);
         chosenPlayer.setRoundStarter(true);
         System.out.println("The first player is " + chosenPlayer.getName());
-        for (Player p : players) {
-            System.out.println(p.getName() + " " + " " + p.isMate());
-        }
         return finalBid;
     }
 
@@ -165,6 +165,7 @@ public class Game {
         }
     }
 
+    //TODO make more readable all the prints and make try catch for input
     private void changeCardsWithMonte(){
         Player firstPlayer = null;
         boolean hasFinished = false;
@@ -219,10 +220,14 @@ public class Game {
         }
     }
 
+    //TODO make more readable all the prints and make try catch for input
     private void nextTurn(){
         for(Player p : players){
-            System.out.println(p.getName() + " choose a card to play");
+            System.out.println(p.getName() + " choose a card to play\t\t\tThe Briscola is: " + briscola);
             p.printHand();
+            if(!table.isEmpty()){
+                System.out.println("The cards on the table are: " + table);
+            }
             table.add(p.removeCard(input.nextInt()));
         }
         turnWinner();
@@ -266,6 +271,42 @@ public class Game {
     private void printTeams(){
         for(Player p : players){
             System.out.println(p.getName() + " " + p.getHand() + " " + p.isMate());
+        }
+    }
+
+    private void getMonteCards(){
+        for(Player p : players){
+            if(p.isRoundStarter()){
+                p.addMonte(deck.cards);
+            }
+        }
+    }
+
+    private int countPoints(){
+        int points = 0;
+        for(Player p : players){
+            if(p.isMate()){
+                points += p.countPoint();
+            }
+        }
+        return points;
+    }
+
+    private void endGame(int points){
+        System.out.println("Game Ended!");
+        input.nextLine();
+        System.out.println("The mates were...");
+        if(points > scoreToGet){
+            for(Player p : players){
+                if(p.isMate()){
+                    System.out.println(p);
+                }
+            }
+        }
+        if(points > scoreToGet){
+            System.out.println("They won with " + points + " points!");
+        } else {
+            System.out.println("They lose, they miss " + (scoreToGet - points) + " points");
         }
     }
 

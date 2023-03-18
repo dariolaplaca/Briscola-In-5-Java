@@ -77,14 +77,18 @@ public class Player{
         return totalPoints;
     }
 
+    public void addMonte(List<Card> cards){
+        this.cardsTaken.addAll(cards);
+    }
 
     public Card removeCard(int i){
+        Iterator<Card> iterator = hand.iterator();
         int index = 0;
-        for(Card c : hand){
-            if(index == i){
-                Card cardToRemove = c;
-                hand.remove(cardToRemove);
-                return cardToRemove;
+        while (iterator.hasNext()) {
+            Card card = iterator.next();
+            if (index == i) {
+                iterator.remove();
+                return card;
             }
             index++;
         }
