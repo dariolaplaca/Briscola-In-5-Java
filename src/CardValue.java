@@ -1,14 +1,14 @@
-public enum CardValue {
+public enum CardValue{
     ASSO(10, 11, 1, "Asso", "A"),
-    DUE(1, 0, 2),
     TRE(9, 10, 3, "Tre","3"),
-    QUATTRO(2, 0, 4),
-    CINQUE(3, 0, 5),
-    SEI(4, 0, 6),
-    SETTE(5, 0, 7),
-    DONNA(6, 2, 8, "Donna","D"),
+    RE(8, 4, 10, "Re", "R"),
     CAVALLO(7, 3, 9, "Cavallo", "C"),
-    RE(8, 4, 10, "Re", "R");
+    DONNA(6, 2, 8, "Donna","D"),
+    SETTE(5, 0, 7),
+    SEI(4, 0, 6),
+    CINQUE(3, 0, 5),
+    QUATTRO(2, 0, 4),
+    DUE(1, 0, 2);
 
     final String cardName;
     final int cardValue;

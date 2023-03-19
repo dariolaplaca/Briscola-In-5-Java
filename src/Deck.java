@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -10,6 +11,10 @@ public class Deck {
 
     public void addCard(Card c){
         cards.add(c);
+    }
+
+    public void addAllCard(Collection<Card> cardList){
+        cards.addAll(cardList);
     }
 
 

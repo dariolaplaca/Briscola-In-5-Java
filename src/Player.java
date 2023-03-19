@@ -9,6 +9,7 @@ public class Player{
     private TreeSet<Card> hand;
     private TreeSet<Card> cardsTaken;
     private int points;
+    protected boolean isAi;
 
     public Player(String name){
         this.name = name;
@@ -17,6 +18,11 @@ public class Player{
         cardsTaken = new TreeSet<>();
         hand = new TreeSet<>();
         id = ++idCounter;
+        isAi = false;
+    }
+
+    public boolean getIsAI(){
+        return this.isAi;
     }
 
     public int getId() {
@@ -61,7 +67,7 @@ public class Player{
         hand.add(c);
     }
 
-    public void takeCards(TreeSet<Card> table){
+    public void takeCards(ArrayList<Card> table){
         cardsTaken.addAll(table);
     }
 

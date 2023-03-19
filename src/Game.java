@@ -2,7 +2,7 @@ import java.util.*;
 
 public class Game {
     private final Deck deck;
-    TreeSet<Card> table;
+    ArrayList<Card> table;
     private final ArrayList<Player> players;
     private static final int NUMBER_OF_PLAYERS = 5;
     private static final int NUMBER_OF_CARDS_IN_FIRST_HAND = 7;
@@ -19,7 +19,7 @@ public class Game {
     public Game(List<String> playersName) {
         players = new ArrayList<>();
         deck = new Deck();
-        table = new TreeSet<>();
+        table = new ArrayList<>();
         for (int i = 0; i < NUMBER_OF_PLAYERS; i++) {
             try {
                 players.add(new Player(playersName.get(i)));
@@ -32,12 +32,17 @@ public class Game {
     public Game() {
         players = new ArrayList<>();
         deck = new Deck();
-        table = new TreeSet<>();
+        table = new ArrayList<>();
         player_one = new Player("Player 1");
         player_two = new Player("Player 2");
         player_three = new Player("Player 3");
         player_four = new Player("Player 4");
         player_five = new Player("Player 5");
+        players.add(player_one);
+        players.add(player_two);
+        players.add(player_three);
+        players.add(player_four);
+        players.add(player_five);
     }
 
     public Deck getDeck() {
@@ -234,7 +239,7 @@ public class Game {
     }
 
     private void turnWinner(){
-        Card winningCard = table.first();
+        Card winningCard = table.get(0);
         for(Card c : table){
             if((c.getSuit().equals(winningCard.getSuit()) && c.getValue().cardPower > winningCard.getValue().cardPower) || (c.getSuit().isBriscola && !winningCard.getSuit().isBriscola)){
                 winningCard = c;
